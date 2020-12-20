@@ -1,5 +1,6 @@
 import requests
 import json
+import frappe
 
 from urllib.parse import quote
 
@@ -92,8 +93,10 @@ class FrappeClient(object):
 		'''Insert a document to the remote server
 
 		:param doc: A dict or Document object to be inserted remotely'''
+		temp = frappe.as_json(doc.as_dict(convert_dates_to_str=True, no_nulls = True))
+
 		res = self.session.post(self.url + "/api/resource/" + quote(doc.get("doctype")),
-			data={"data":json.dumps(doc)})
+			data={"data":temp})
 		return self.post_process(res)
 
 	def insert_many(self, docs):
