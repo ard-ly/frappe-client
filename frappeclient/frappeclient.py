@@ -96,7 +96,7 @@ class FrappeClient(object):
 		temp = frappe.as_json(doc.as_dict(convert_dates_to_str=True, no_nulls = True))
 
 		res = self.session.post(self.url + "/api/resource/" + quote(doc.get("doctype")),
-			data={"data":temp})
+			data={"data":temp}, headers=self.headers)
 		return self.post_process(res)
 
 	def insert_many(self, docs):
@@ -113,7 +113,7 @@ class FrappeClient(object):
 
 		:param doc: dict or Document object to be updated remotely. `name` is mandatory for this'''
 		url = self.url + "/api/resource/" + quote(doc.get("doctype")) + "/" + quote(doc.get("name"))
-		res = self.session.put(url, data={"data":json.dumps(doc)})
+		res = self.session.put(url, data={"data":json.dumps(doc)}, headers=self.headers)
 		return self.post_process(res)
 
 	def bulk_update(self, docs):
