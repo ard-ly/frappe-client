@@ -5,7 +5,7 @@ Simple Frappe-like Python wrapper for Frappe REST API
 ### Install
 
 ```
-git clone https://github.com/frappe/frappe-client
+git clone https://github.com/ard-ly/frappe-client
 pip install -e frappe-client
 ```
 
